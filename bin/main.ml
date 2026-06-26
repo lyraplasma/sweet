@@ -1,5 +1,6 @@
 let () =
   let info = Info.collect () in
+  Printf.printf "Your Machine's Status :3";
   Printf.printf "OS:        %s\n" info.Info.os;
   Printf.printf "Hostname:  %s\n" info.Info.hostname;
   Printf.printf "Kernel:    %s\n" info.Info.kernel;
