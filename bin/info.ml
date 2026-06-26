@@ -28,9 +28,14 @@ let get_os () =
 
 let get_hostname () = Unix.gethostname ()
 
+(* FIXED: use the external `uname` command instead of Unix.uname *)
 let get_kernel () =
-  let u = Unix.uname () in
-  u.Unix.sysname ^ " " ^ u.Unix.release
+  try
+    let ic = Unix.open_process_in "uname -s -r 2>/dev/null" in
+    let line = input_line ic in
+    let _ = Unix.close_process_in ic in
+    String.trim line
+  with _ -> Sys.os_type
 
 let get_uptime () =
   try
