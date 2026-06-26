@@ -28,7 +28,6 @@ let get_os () =
 
 let get_hostname () = Unix.gethostname ()
 
-(* FIXED: use the external `uname` command instead of Unix.uname *)
 let get_kernel () =
   try
     let ic = Unix.open_process_in "uname -s -r 2>/dev/null" in
@@ -131,11 +130,19 @@ let get_memory () =
 
 let get_disk () =
   try
-    let stat = Unix.statvfs "/" in
-    let total = stat.Unix.blocks * stat.Unix.bsize in
-    let free = stat.Unix.bavail * stat.Unix.bsize in
-    let used = total - free in
-    Printf.sprintf "%d GiB / %d GiB" (used / (1024*1024*1024)) (total / (1024*1024*1024))
+    let ic = Unix.open_process_in "df -k / 2>/dev/null" in
+    let _ = input_line ic in  (* skip header *)
+    let line = input_line ic in
+    let _ = Unix.close_process_in ic in
+    let fields = List.filter ((<>) "") (String.split_on_char ' ' line) in
+    match fields with
+    | _ :: total :: used :: _ ->
+        let total_kb = int_of_string total in
+        let used_kb = int_of_string used in
+        let total_gb = total_kb / (1024 * 1024) in
+        let used_gb = used_kb / (1024 * 1024) in
+        Printf.sprintf "%d GiB / %d GiB" used_gb total_gb
+    | _ -> "N/A"
   with _ -> "N/A"
 
 let collect () =
