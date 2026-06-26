@@ -1,4 +1,4 @@
 (executable
  (public_name sweet)
  (name main)
- (libraries sweet))
+ (libraries unix))
