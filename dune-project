@@ -24,9 +24,3 @@
   ("add topics" "to describe" your project)))
 
 ; See the complete stanza docs at https://dune.readthedocs.io/en/stable/reference/dune-project/index.html
-
-(category tools)
-(depends
-  (ocaml (>= 4.14))
-  (cmdliner (>= 1.2.0))
-  (fmt (>= 0.9.0)))
