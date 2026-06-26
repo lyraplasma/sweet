@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+dune build
+dune exec sweet
