@@ -23,13 +23,9 @@ let () =
       Printf.printf "\t\tDisk:      %s\n" info.disk
     end
   else
-    begin
+begin
+      Printf.printf "<><><><> %s's STATUS <><><><>\n" info.hostname;
       Printf.printf "OS:        %s\n" info.os;
-      Printf.printf "Hostname:  %s\n" info.hostname;
-      Printf.printf "Kernel:    %s\n" info.kernel;
-      Printf.printf "Uptime:    %s\n" info.uptime;
-      Printf.printf "Packages:  %s\n" info.packages;
-      Printf.printf "Shell:     %s\n" info.shell;
       Printf.printf "CPU:       %s\n" info.cpu;
       Printf.printf "GPU:       %s\n" info.gpu;
       Printf.printf "Memory:    %s\n" info.memory;
