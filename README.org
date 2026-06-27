@@ -1,0 +1,4 @@
+* sweet
+Inferior version of neofetch :))))
+
+NOTE: To install use `dune install`
