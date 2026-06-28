@@ -22,6 +22,11 @@ let () =
       Printf.printf "\t\tMemory:    %s\n" info.memory;
       Printf.printf "\t\tDisk:      %s\n" info.disk
     end
+  else if has_flag "-i" then
+  begin
+    Printf.printf "\tCPU::GPU::MEM\n";
+    Printf.printf "\t%s::%s::%s\n" info.cpu info.gpu info.memory
+  end
   else
 begin
       Printf.printf "<><><><> %s's STATUS <><><><>\n" info.hostname;
